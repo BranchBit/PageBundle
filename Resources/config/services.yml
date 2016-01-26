@@ -1,0 +1,5 @@
+services:
+    app.routing_loader:
+        class: BBIT\PageBundle\Routing\PageRouteLoader
+        tags:
+            - { name: routing.loader }

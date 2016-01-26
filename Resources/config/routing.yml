@@ -1,0 +1,7 @@
+bbit_page_router:
+    resource: .
+    type: page_route
+
+bbit_pages:
+    path:      /admin/pages
+    defaults:  { _controller: BBITPageBundle:AdminPage:index }
