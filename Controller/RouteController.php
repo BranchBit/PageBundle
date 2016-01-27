@@ -11,12 +11,9 @@ class RouteController extends Controller
 {
     public function routeAction(Request $request, $uri)
     {
-        //fake textpartial
-        $partial = new TextPartial();
-        $partial->setContent('CONTENT OF PARTIAL');
 
         $page = $this->get('doctrine.orm.default_entity_manager')
-            ->getRepository('BBITPageBundle:Page')
+            ->getRepository('BBITPageBundle:AbstractPage')
             ->findOneBy(['title' => $uri]);
 
         if ($page) {
@@ -25,16 +22,6 @@ class RouteController extends Controller
             $work = $page->work($this->container, $request);
 
             $work['_page'] = $page;
-
-//            $work['_regions'] = [];
-//            $work['_regions'] = [];
-//            $work['_regions']['_main'] = [];
-//            $work['_regions']['_main']['_partials'] = [];
-//            $work['_regions']['_main']['_partials'][] = $this->get('templating')->render($partial->getDefaultView(), $partial->work($this->container, $request));
-//            $work['_regions']['_main']['_partials'][] = $this->get('templating')->render($partial->getDefaultView(), $partial->work($this->container, $request));
-//            $work['_regions']['_bottom'] = [];
-//            $work['_regions']['_bottom']['_partials'] = [];
-//            $work['_regions']['_bottom']['_partials'][] = $this->get('templating')->render($partial->getDefaultView(), $partial->work($this->container, $request));
 
             return $this->render($page->getDefaultTemplate(), $work);
 
