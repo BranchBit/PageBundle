@@ -2,9 +2,20 @@
 namespace BBIT\PageBundle\Entity;
 
 use BBIT\PageBundle\Form\AdminTextPartialType;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
+
+/**
+ * Class AbstractPartial
+ * @package BBIT\PageBundle\Entity
+ * @ORM\Entity(repositoryClass="AbstractPartialRepository", )
+ * @ORM\Table(name="bbit_partials")
+ * @ORM\HasLifecycleCallbacks()
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
+ */
 abstract class AbstractPartial implements PartialInterface
 {
 
@@ -56,6 +67,8 @@ abstract class AbstractPartial implements PartialInterface
     {
         $this->id = $id;
     }
+
+
 
 
 

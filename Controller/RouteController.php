@@ -14,7 +14,9 @@ class RouteController extends Controller
 
         $page = $this->get('doctrine.orm.default_entity_manager')
             ->getRepository('BBITPageBundle:AbstractPage')
-            ->findOneBy(['title' => $uri]);
+            ->findOneBy(['slug' => $uri]);
+
+
 
         if ($page) {
 

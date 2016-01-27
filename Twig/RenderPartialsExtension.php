@@ -69,9 +69,10 @@ class RenderPartialsExtension extends \Twig_Extension
     {
 
         //render all partials for page that are in region name
-        $partials = $this->collectPartials($page, $name);
+        //$partials = $this->collectPartials($page, $name);
+        $partials = $page->getPartials();
 
-        $content = "";
+        $content = '';
         foreach ($partials as $partial) {
 
             $content .= $environment->loadTemplate($partial->getDefaultView())->render($partial->work($context));
@@ -80,17 +81,17 @@ class RenderPartialsExtension extends \Twig_Extension
         return $content;
     }
 
-    public function renderPage(\Twig_Environment $environment, $context, PageInterface $page)
-    {
-
-        //$content = $environment->loadTemplate($page->getDefaultView())->render($page->work($context));
-
-        $template = $this->environment->loadTemplate($page->getDefaultView());
-
-        return $template->render(array_merge([], $page->work($context)));
-
-        return $content;
-    }
+//    public function renderPage(\Twig_Environment $environment, $context, PageInterface $page)
+//    {
+//
+//        //$content = $environment->loadTemplate($page->getDefaultView())->render($page->work($context));
+//
+//        $template = $this->environment->loadTemplate($page->getDefaultView());
+//
+//        return $template->render(array_merge([], $page->work($context)));
+//
+//        return $content;
+//    }
 
 
     public function getName()

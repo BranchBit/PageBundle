@@ -11,3 +11,13 @@ services:
             - '@request_stack'
         tags:
             - { name: twig.extension }
+    bbit.page.menu_builder:
+        class: BBIT\PageBundle\Menu\MenuBuilder
+        arguments: ["@knp_menu.factory"]
+
+    bbit.page.main_menu:
+        class: Knp\Menu\MenuItem # the service definition requires setting the class
+        factory: ["@bbit.page.menu_builder", createMainMenu]
+        arguments: ["@request_stack", "@doctrine.orm.default_entity_manager"]
+        tags:
+            - { name: knp_menu.menu, alias: main } # The alias is what is used to retrieve the menu

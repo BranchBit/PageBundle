@@ -9,8 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="bbit_partial_text")
- * @ORM\HasLifecycleCallbacks()
  */
 class TextPartial extends AbstractPartial
 {
