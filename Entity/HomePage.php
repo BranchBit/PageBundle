@@ -13,7 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
 class HomePage extends AbstractPage
 {
 
-
+    public function getSlug(){
+        return "";
+    }
 
     public function getDefaultView()
     {

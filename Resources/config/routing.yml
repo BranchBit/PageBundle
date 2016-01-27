@@ -1,6 +1,8 @@
 bbit_page_router:
     resource: .
     type: page_route
+    requirements:
+        uri: '^$|[^/]++'
 
 bbit_pages:
     path:      /admin/pages
@@ -9,6 +11,7 @@ bbit_pages_edit:
     path:      /admin/pages/{id}/edit
     defaults:  { _controller: BBITPageBundle:AdminPage:edit }
 
+
 bbit_homepage:
     path:      /
-    defaults:  { _controller: BBITPageBundle:HomePage:index }
+    defaults:  { _controller: BBITPageBundle:Route:homePageRoute }

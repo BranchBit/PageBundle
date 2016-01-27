@@ -5,13 +5,14 @@ namespace BBIT\PageBundle\Twig;
 use BBIT\PageBundle\Entity\PageInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig_Environment;
+use Twig_Extension;
 use Twig_SimpleFunction;
 
 /**
  * Class RenderPartialsExtension
  * @package BBIT\PageBundle\Twig
  */
-class RenderPartialsExtension extends \Twig_Extension
+class RenderPartialsExtension extends Twig_Extension
 {
     private $em;
 
@@ -67,8 +68,6 @@ class RenderPartialsExtension extends \Twig_Extension
      **/
     public function renderPartials(Twig_Environment $environment, $context, PageInterface $page, $name)
     {
-
-        //render all partials for page that are in region name
         $partials = $this->collectPartials($page, $name);
 
         $content = '';

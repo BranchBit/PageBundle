@@ -26,7 +26,7 @@ class MenuBuilder
             ->getQuery()
             ->getResult();
 
-        $menu->addChild('Home1', array('route' => 'bbit_pages'));
+        //check if home homepage exists, and put it there
 
 
 

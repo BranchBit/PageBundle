@@ -20,7 +20,8 @@ class AdminPageController extends Controller
 
         $entityName = 'BBITPageBundle:AbstractPage';
 
-        $items = $this->get('doctrine.orm.default_entity_manager')
+        $items = $this->get('doctrine')
+            ->getManager()
             ->getRepository($entityName)
             ->createQueryBuilder('x')
             ->getQuery()
@@ -31,7 +32,8 @@ class AdminPageController extends Controller
 
     public function editAction($id)
     {
-        $item = $this->get('doctrine.orm.default_entity_manager')
+        $item = $this->get('doctrine')
+            ->getManager()
             ->getRepository('BBITPageBundle:AbstractPage')
             ->find($id);
 
