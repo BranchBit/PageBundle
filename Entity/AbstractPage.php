@@ -6,9 +6,18 @@ use BBIT\PageBundle\Form\AdminPageType;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
-
+/**
+ * Class AbstractPage
+ * @package BBIT\PageBundle\Entity
+ * @ORM\Entity()
+ * @ORM\Table(name="bbit_pages")
+ * @ORM\HasLifecycleCallbacks()
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
+ */
 abstract class AbstractPage implements PageInterface
 {
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -23,6 +32,14 @@ abstract class AbstractPage implements PageInterface
      * @Assert\NotBlank()
      */
     protected $title;
+
+    /**
+     * @param string $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
 
     /**
      * @return mixed

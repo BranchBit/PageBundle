@@ -9,8 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="bbit_pages")
- * @ORM\HasLifecycleCallbacks()
  */
 class Page extends AbstractPage
 {
