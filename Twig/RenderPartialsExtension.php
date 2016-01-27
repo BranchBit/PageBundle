@@ -3,11 +3,14 @@ namespace BBIT\PageBundle\Twig;
 
 
 use BBIT\PageBundle\Entity\PageInterface;
-use BBIT\PageBundle\Entity\TextPartial;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Twig_Environment;
 use Twig_SimpleFunction;
 
+/**
+ * Class RenderPartialsExtension
+ * @package BBIT\PageBundle\Twig
+ */
 class RenderPartialsExtension extends \Twig_Extension
 {
     private $em;
@@ -50,32 +53,31 @@ class RenderPartialsExtension extends \Twig_Extension
 
     public function collectPartials(PageInterface $page, $name)
     {
-
-        $partials = new ArrayCollection();
-        $partial = new TextPartial();
-        $partial->setContent('CONTENT OF PARTIAL1');
-        $partials->add($partial);
-        $partial = new TextPartial();
-        $partial->setContent('CONTENT OF PARTIAL2');
-        $partials->add($partial);
-        $partial = new TextPartial();
-        $partial->setContent('CONTENT OF PARTIAL3');
-        $partials->add($partial);
-
-        return $partials;
+        //filter by name
+        //$name;
+        return $page->getPartials();
     }
 
-    public function renderPartials(\Twig_Environment $environment, $context, PageInterface $page, $name)
+    /**
+     * @param Twig_Environment $environment
+     * @param $context
+     * @param PageInterface $page
+     * @param $name
+     * @return string
+     **/
+    public function renderPartials(Twig_Environment $environment, $context, PageInterface $page, $name)
     {
 
         //render all partials for page that are in region name
-        //$partials = $this->collectPartials($page, $name);
-        $partials = $page->getPartials();
+        $partials = $this->collectPartials($page, $name);
 
         $content = '';
         foreach ($partials as $partial) {
-
-            $content .= $environment->loadTemplate($partial->getDefaultView())->render($partial->work($context));
+            try {
+                $content .= $environment->loadTemplate($partial->getDefaultView())->render($partial->work($context));
+            } catch (\Exception $e) {
+                $content = $e->getMessage();
+            }
         }
 
         return $content;

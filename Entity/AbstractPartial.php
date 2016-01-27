@@ -83,7 +83,7 @@ abstract class AbstractPartial implements PartialInterface
         return $this->getDefaultView();
     }
 
-    public function getDefaultTemplate()
+    public function getDefaultView()
     {
         return 'BBITPageBundle:Default:partial.html.twig';
     }

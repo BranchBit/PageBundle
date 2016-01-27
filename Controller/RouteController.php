@@ -2,7 +2,7 @@
 
 namespace BBIT\PageBundle\Controller;
 
-use BBIT\PageBundle\Entity\TextPartial;
+use BBIT\PageBundle\Entity\AbstractPage;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -12,20 +12,18 @@ class RouteController extends Controller
     public function routeAction(Request $request, $uri)
     {
 
-        $page = $this->get('doctrine.orm.default_entity_manager')
+        /** @var AbstractPage $page */
+        $page = $this->get('doctrine')->getManager()
             ->getRepository('BBITPageBundle:AbstractPage')
             ->findOneBy(['slug' => $uri]);
 
-
-
         if ($page) {
-
 
             $work = $page->work($this->container, $request);
 
             $work['_page'] = $page;
 
-            return $this->render($page->getDefaultTemplate(), $work);
+            return $this->render($page->getDefaultView(), $work);
 
 
         } else {

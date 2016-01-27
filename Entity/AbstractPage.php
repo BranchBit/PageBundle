@@ -131,7 +131,7 @@ abstract class AbstractPage implements PageInterface
         return new AdminPageType();
     }
 
-    public function getDefaultTemplate()
+    public function getDefaultView()
     {
         return 'BBITPageBundle:Default:page.html.twig';
     }
