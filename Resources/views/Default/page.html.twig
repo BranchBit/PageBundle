@@ -5,21 +5,28 @@
 
 
 
-<h1>{{ title }}</h1>
-qsd
-qsd
-qsd
-
-{% for _partial in _regions._main._partials %}
-    {{ _partial|raw }}
-{% endfor %}
+{#<h1>{{ title }}</h1>#}
+{#qsd#}
+{#qsd#}
 
 
 
-dq
-sd
-TWIG
-<hr>
-{% for _partial in _regions._bottom._partials %}
-    {{ _partial|raw }}
-{% endfor %}
+{{ render_partials(_page, 'main') }}
+
+
+
+
+
+{#{% for _partial in _regions._main._partials %}#}
+    {#{{ _partial|raw }}#}
+{#{% endfor %}#}
+
+
+{#{{ '020'|bla }}#}
+{#dq#}
+{#sd#}
+{#TWIG#}
+{#<hr>#}
+{#{% for _partial in _regions._bottom._partials %}#}
+    {#{{ _partial|raw }}#}
+{#{% endfor %}#}

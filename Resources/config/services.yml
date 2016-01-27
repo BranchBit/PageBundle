@@ -1,5 +1,13 @@
 services:
-    app.routing_loader:
+    bbit.page.routing_loader:
         class: BBIT\PageBundle\Routing\PageRouteLoader
         tags:
             - { name: routing.loader }
+    bbit.page.twig.partial_extension:
+        class: BBIT\PageBundle\Twig\RenderPartialsExtension
+        public: false
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - '@request_stack'
+        tags:
+            - { name: twig.extension }

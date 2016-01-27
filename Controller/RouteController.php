@@ -21,17 +21,20 @@ class RouteController extends Controller
 
         if ($page) {
 
+
             $work = $page->work($this->container, $request);
 
-            $work['_regions'] = [];
-            $work['_regions'] = [];
-            $work['_regions']['_main'] = [];
-            $work['_regions']['_main']['_partials'] = [];
-            $work['_regions']['_main']['_partials'][] = $this->get('templating')->render($partial->getDefaultView(), $partial->work($this->container, $request));
-            $work['_regions']['_main']['_partials'][] = $this->get('templating')->render($partial->getDefaultView(), $partial->work($this->container, $request));
-            $work['_regions']['_bottom'] = [];
-            $work['_regions']['_bottom']['_partials'] = [];
-            $work['_regions']['_bottom']['_partials'][] = $this->get('templating')->render($partial->getDefaultView(), $partial->work($this->container, $request));
+            $work['_page'] = $page;
+
+//            $work['_regions'] = [];
+//            $work['_regions'] = [];
+//            $work['_regions']['_main'] = [];
+//            $work['_regions']['_main']['_partials'] = [];
+//            $work['_regions']['_main']['_partials'][] = $this->get('templating')->render($partial->getDefaultView(), $partial->work($this->container, $request));
+//            $work['_regions']['_main']['_partials'][] = $this->get('templating')->render($partial->getDefaultView(), $partial->work($this->container, $request));
+//            $work['_regions']['_bottom'] = [];
+//            $work['_regions']['_bottom']['_partials'] = [];
+//            $work['_regions']['_bottom']['_partials'][] = $this->get('templating')->render($partial->getDefaultView(), $partial->work($this->container, $request));
 
             return $this->render($page->getDefaultTemplate(), $work);
 

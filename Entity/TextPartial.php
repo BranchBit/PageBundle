@@ -45,7 +45,7 @@ class TextPartial extends AbstractPartial
         return 'BBITPageBundle:Default:partial_text.html.twig';
     }
 
-    public function work(ContainerInterface $container, Request $request)
+    public function work($pageContext)
     {
         return ['content' => $this->content];
     }
