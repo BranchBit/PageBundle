@@ -8,5 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 interface PageInterface
 {
+    public function getDefaultView();
     public function work(ContainerInterface $container, Request $request);
 }

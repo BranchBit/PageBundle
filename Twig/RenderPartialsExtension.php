@@ -37,6 +37,14 @@ class RenderPartialsExtension extends \Twig_Extension
                     'is_safe' => array('html')
                 )
             ),
+            new Twig_SimpleFunction(
+                'render_page',
+                [$this, 'renderPartials'],
+                array(
+                    'needs_environment' => true,
+                    'needs_context' => true,
+                )
+            )
         );
     }
 
@@ -68,6 +76,18 @@ class RenderPartialsExtension extends \Twig_Extension
 
             $content .= $environment->loadTemplate($partial->getDefaultView())->render($partial->work($context));
         }
+
+        return $content;
+    }
+
+    public function renderPage(\Twig_Environment $environment, $context, PageInterface $page)
+    {
+
+        //$content = $environment->loadTemplate($page->getDefaultView())->render($page->work($context));
+
+        $template = $this->environment->loadTemplate($page->getDefaultView());
+
+        return $template->render(array_merge([], $page->work($context)));
 
         return $content;
     }

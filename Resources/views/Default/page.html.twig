@@ -1,32 +1,6 @@
-{# extend #}
+{% extends 'BBITPageBundle:Default:layout.html.twig' %}
 
-{# render partials ... ? #}
+{% block body %}
+    {{ render_partials(_page, 'main') }}
+{% endblock body %}
 
-
-
-
-{#<h1>{{ title }}</h1>#}
-{#qsd#}
-{#qsd#}
-
-
-
-{{ render_partials(_page, 'main') }}
-
-
-
-
-
-{#{% for _partial in _regions._main._partials %}#}
-    {#{{ _partial|raw }}#}
-{#{% endfor %}#}
-
-
-{#{{ '020'|bla }}#}
-{#dq#}
-{#sd#}
-{#TWIG#}
-{#<hr>#}
-{#{% for _partial in _regions._bottom._partials %}#}
-    {#{{ _partial|raw }}#}
-{#{% endfor %}#}

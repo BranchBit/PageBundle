@@ -15,6 +15,11 @@ use Doctrine\ORM\Mapping as ORM;
 class Page extends AbstractPage
 {
 
+    public function getDefaultView()
+    {
+        return 'BBITPageBundle:Default:page.html.twig';
+    }
+
     public function work(ContainerInterface $container, Request $request)
     {
         return ['title' => $this->title, 'test' => 'test123', 'test2' => 'test'];
