@@ -7,10 +7,16 @@ bbit_page_router:
 bbit_pages:
     path:      /admin/pages
     defaults:  { _controller: BBITPageBundle:AdminPage:index }
+
+bbit_pages_create:
+    path:      /admin/pages/create
+    defaults:  { _controller: BBITPageBundle:AdminPage:create }
 bbit_pages_edit:
     path:      /admin/pages/{id}/edit
     defaults:  { _controller: BBITPageBundle:AdminPage:edit }
-
+bbit_pages_remove:
+    path:      /admin/pages/{id}/remove
+    defaults:  { _controller: BBITPageBundle:AdminPage:remove }
 
 bbit_homepage:
     path:      /

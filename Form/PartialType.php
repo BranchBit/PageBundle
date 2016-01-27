@@ -8,7 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 
-class AdminTextPartialType extends AbstractType
+class PartialType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -16,13 +16,17 @@ class AdminTextPartialType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('content', null, array('label' => 'title'));;
+        $builder->add('name', null, array('label' => 'name'));
+
+        // get actual formtype for this partial // we fake text now
+
+        $builder->add('self', TextPartialType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BBIT\PageBundle\Entity\Page',
+            'data_class' => 'BBIT\PageBundle\Entity\AbstractPartial',
         ));
     }
 }

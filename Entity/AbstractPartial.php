@@ -2,6 +2,7 @@
 namespace BBIT\PageBundle\Entity;
 
 use BBIT\PageBundle\Form\AdminTextPartialType;
+use BBIT\PageBundle\Form\PartialType;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
@@ -34,7 +35,9 @@ abstract class AbstractPartial implements PartialInterface
      */
     protected $name;
 
-
+    public function getSelf(){
+        return $this;
+    }
 
     /**
      * @return string
@@ -90,6 +93,6 @@ abstract class AbstractPartial implements PartialInterface
 
     public function getAdminFormType()
     {
-        return new AdminTextPartialType();
+        return new PartialType();
     }
 }
