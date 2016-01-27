@@ -5,6 +5,7 @@ namespace BBIT\PageBundle\Controller;
 use AppBundle\Entity\TestPage;
 use BBIT\PageBundle\Entity\Page;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 
 class AdminPageController extends Controller
@@ -30,14 +31,27 @@ class AdminPageController extends Controller
         return $this->render('BBITAdminBundle:pages:index.html.twig', ['items' => $items]);
     }
 
-    public function editAction($id)
+    public function editAction(Request $request, $id)
     {
         $item = $this->get('doctrine')
             ->getManager()
             ->getRepository('BBITPageBundle:AbstractPage')
             ->find($id);
 
-        return $this->render('BBITAdminBundle:pages:edit.html.twig', ['item' => $item]);
+        $formClass = $item->getAdminFormType();
+        $form = $this->createForm(get_class($formClass), $item);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('bbit_pages');
+        }
+
+
+        return $this->render('BBITAdminBundle:pages:edit.html.twig', ['item' => $item, 'form' => $form->createView()]);
     }
 
 
