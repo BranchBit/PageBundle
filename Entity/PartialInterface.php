@@ -2,7 +2,9 @@
 
 namespace BBIT\PageBundle\Entity;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 interface PartialInterface
 {
@@ -16,5 +18,10 @@ interface PartialInterface
      */
     public function getDefaultView();
 
-    public function work($pageContext);
+    /**
+     * @param ContainerInterface $container
+     * @param Request $request
+     * @return array
+     */
+    public function work(ContainerInterface $container, Request $request, $twigContext);
 }

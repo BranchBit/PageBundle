@@ -18,6 +18,11 @@ class Page extends AbstractPage
         return 'BBITPageBundle:Default:page.html.twig';
     }
 
+    /**
+     * @param ContainerInterface $container
+     * @param Request $request
+     * @return array
+     */
     public function work(ContainerInterface $container, Request $request)
     {
         return ['title' => $this->title, 'test' => 'test123', 'test2' => 'test'];

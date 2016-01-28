@@ -49,8 +49,8 @@ class TextPartial extends AbstractPartial
         return 'BBITPageBundle:Default:partial_text.html.twig';
     }
 
-    public function work($pageContext)
+    public function work(ContainerInterface $container, Request $request, $twigContext)
     {
-        return ['content' => $this->content];
+        return ['content' => $container->getParameter('mailer_transport')];
     }
 }

@@ -4,6 +4,8 @@ namespace BBIT\PageBundle\Entity;
 use BBIT\PageBundle\Form\AdminTextPartialType;
 use BBIT\PageBundle\Form\PartialType;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -118,4 +120,7 @@ abstract class AbstractPartial implements PartialInterface
     {
         return new PartialType();
     }
+
+
+    abstract public function work(ContainerInterface $container, Request $request, $twigContext);
 }

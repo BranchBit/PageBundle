@@ -4,6 +4,7 @@ namespace BBIT\PageBundle\Entity;
 
 use BBIT\PageBundle\Form\AdminPageType;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -18,6 +19,17 @@ use Doctrine\ORM\Mapping as ORM;
  */
 abstract class AbstractPage implements PageInterface
 {
+
+    private $container;
+
+    public function setContainer(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
+
+    public function getContainer(){
+        return $this->container;
+    }
 
     public function __construct()
     {
@@ -153,5 +165,5 @@ abstract class AbstractPage implements PageInterface
     }
 
 
-    //work method
+        //work method
 }

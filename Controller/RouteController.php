@@ -34,8 +34,10 @@ class RouteController extends Controller
 
     private function renderPage(PageInterface $page, Request $request){
         $work = $page->work($this->container, $request);
+        $page->setContainer($this->container);
 
         $work['_page'] = $page;
+
 
         return $this->render($page->getDefaultView(), $work);
     }

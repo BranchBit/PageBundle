@@ -23,5 +23,17 @@ interface PageInterface
      * @return AbstractPartial[]|null
      */
     public function getPartials();
+
+    /**
+     * @param ContainerInterface $container
+     * @param Request $request
+     * @return array
+     */
     public function work(ContainerInterface $container, Request $request);
+
+    public function setContainer(ContainerInterface $container);
+
+    public function getContainer();
+
+    public function __construct();
 }

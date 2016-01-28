@@ -2,8 +2,10 @@
 namespace BBIT\PageBundle\Twig;
 
 
+use BBIT\PageBundle\Entity\AbstractPartial;
 use BBIT\PageBundle\Entity\PageInterface;
 use Doctrine\Common\Collections\Criteria;
+use Symfony\Bridge\Twig\AppVariable;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig_Environment;
 use Twig_Extension;
@@ -53,6 +55,11 @@ class RenderPartialsExtension extends Twig_Extension
         );
     }
 
+    /**
+     * @param PageInterface $page
+     * @param $name
+     * @return AbstractPartial[]
+     */
     public function collectPartials(PageInterface $page, $name)
     {
         $filtered = $page->getPartials()->filter(
@@ -75,10 +82,17 @@ class RenderPartialsExtension extends Twig_Extension
     {
         $partials = $this->collectPartials($page, $name);
 
+
+
+        /** @var AppVariable $appvariable */
+        $appvariable = $context['app'];
+
         $content = '';
         foreach ($partials as $partial) {
             try {
-                $content .= $environment->loadTemplate($partial->getDefaultView())->render($partial->work($context));
+                $content .= $environment->loadTemplate($partial->getDefaultView())->render(
+                    $partial->work($page->getContainer(), $appvariable->getRequest(), $context)
+                );
             } catch (\Exception $e) {
                 $content = $e->getMessage();
             }
