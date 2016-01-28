@@ -24,7 +24,8 @@ class AdminPageType extends AbstractType
         $builder->add('slug', null, array('label' => 'slug'));
 
         $builder->add('partials', CollectionType::class, array(
-            'entry_type' => PartialType::class
+            'entry_type' => PartialType::class,
+            'allow_add'    => true,
         ));
 
 

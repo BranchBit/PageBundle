@@ -2,6 +2,7 @@
 
 namespace BBIT\PageBundle\Entity;
 
+use BBIT\PageBundle\Form\TextPartialType;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -35,6 +36,11 @@ class TextPartial extends AbstractPartial
     public function setContent($content)
     {
         $this->content = $content;
+    }
+
+    public function getAdminFormType()
+    {
+        return new TextPartialType();
     }
 
 
