@@ -35,6 +35,29 @@ abstract class AbstractPartial implements PartialInterface
      */
     protected $name;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $region;
+
+    /**
+     * @return string
+     */
+    public function getRegion()
+    {
+        return $this->region;
+    }
+
+    /**
+     * @param string $region
+     */
+    public function setRegion($region)
+    {
+        $this->region = $region;
+    }
+
     public function getSelf(){
         return $this;
     }

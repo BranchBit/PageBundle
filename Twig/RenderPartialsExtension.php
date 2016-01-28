@@ -3,6 +3,7 @@ namespace BBIT\PageBundle\Twig;
 
 
 use BBIT\PageBundle\Entity\PageInterface;
+use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig_Environment;
 use Twig_Extension;
@@ -41,22 +42,26 @@ class RenderPartialsExtension extends Twig_Extension
                     'is_safe' => array('html')
                 )
             ),
-            new Twig_SimpleFunction(
-                'render_page',
-                [$this, 'renderPartials'],
-                array(
-                    'needs_environment' => true,
-                    'needs_context' => true,
-                )
-            )
+//            new Twig_SimpleFunction(
+//                'render_page',
+//                [$this, 'renderPartials'],
+//                array(
+//                    'needs_environment' => true,
+//                    'needs_context' => true,
+//                )
+//            )
         );
     }
 
     public function collectPartials(PageInterface $page, $name)
     {
-        //filter by name
-        //$name;
-        return $page->getPartials();
+        $filtered = $page->getPartials()->filter(
+            function($entry) use ($name) {
+                return ($entry->getRegion() === $name);
+            }
+        );
+
+        return $filtered;
     }
 
     /**

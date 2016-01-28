@@ -2,4 +2,12 @@
 {% block menu %}
     {{ knp_menu_render('main') }}
 {% endblock %}
-{% block page %}{% endblock %}
+{% block page %}
+    <h2>{{ title }}</h2>
+
+    {{ render_partials(_page, 'top') }}
+    <hr>
+    {{ render_partials(_page, 'main') }}
+    <hr>
+    {{ render_partials(_page, 'bottom') }}
+{% endblock page %}
