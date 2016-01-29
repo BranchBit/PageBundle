@@ -33,8 +33,16 @@ abstract class AbstractPage implements PageInterface
 
     public function __construct()
     {
+        $this->treeItem = new TreeItem();
+        $this->treeItem->setTitle('asdasd'.rand(999, 99999));
         $this->partials = new ArrayCollection();
     }
+
+    /**
+     * @ORM\OneToOne(targetEntity="BBIT\PageBundle\Entity\TreeItem", inversedBy="page", cascade={"persist"})
+     * @ORM\JoinColumn(name="tree_item_id", referencedColumnName="id")
+     */
+    protected $treeItem;
 
     /**
      * @ORM\ManyToMany(targetEntity="BBIT\PageBundle\Entity\AbstractPartial")
@@ -162,6 +170,22 @@ abstract class AbstractPage implements PageInterface
     public function setPartials($partials)
     {
         $this->partials = $partials;
+    }
+
+    /**
+     * @param mixed $treeItem
+     */
+    public function setTreeItem($treeItem)
+    {
+        $this->treeItem = $treeItem;
+    }
+
+    /**
+     * @return TreeItem|null
+     */
+    public function getTreeItem()
+    {
+        return $this->treeItem;
     }
 
 

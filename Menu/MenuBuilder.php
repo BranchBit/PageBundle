@@ -21,17 +21,15 @@ class MenuBuilder
         $menu = $this->factory->createItem('root');
 
         $items = $em
-            ->getRepository('BBITPageBundle:AbstractPage')
-            ->createQueryBuilder('x')
-            ->getQuery()
-            ->getResult();
-
+            ->getRepository('BBITPageBundle:TreeItem')
+            ->getRootNodes()
+;
         //check if home homepage exists, and put it there
 
 
 
         foreach ($items as $item) {
-            $menu->addChild($item->getTitle(), array('route' => 'extraRoute', 'routeParameters' => ['uri' => $item->getSlug()]));
+            $menu->addChild($item->getTitle(), array('route' => 'extraRoute', 'routeParameters' => ['uri' => $item->getTitle()]));
         }
 
 

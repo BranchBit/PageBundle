@@ -25,7 +25,6 @@ class PartialType extends AbstractType
     {
         $partial = $this->partial;
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($builder, $partial) {
-
             /** @var AbstractPartial $partial */
             $form = $event->getForm();
             $partial = $event->getData();
@@ -38,10 +37,6 @@ class PartialType extends AbstractType
                     null,
                     ['auto_initialize' => false]
                 ));
-//            exit("in");
-//            $partialForm = $partial->getAdminFormType();
-//            $builder->add('self', get_class($partialForm));
-//            $builder->add('self', TextPartialType::class);
             }
 
         });

@@ -4,7 +4,7 @@
 {% endblock %}
 {% block page %}
     <h2>{{ title }}</h2>
-
+{#{{ _page.treeItem.title }}#}
     {{ render_partials(_page, 'top') }}
     <hr>
     {{ render_partials(_page, 'main') }}

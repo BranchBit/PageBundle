@@ -4,6 +4,7 @@ namespace BBIT\PageBundle\Controller;
 
 use BBIT\PageBundle\Entity\AbstractPage;
 use BBIT\PageBundle\Entity\PageInterface;
+use BBIT\PageBundle\Entity\TreeItem;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -12,18 +13,26 @@ class RouteController extends Controller
 {
     public function routeAction(Request $request, $uri)
     {
-        /** @var AbstractPage $page */
-        $page = $this->get('doctrine')->getManager()
-            ->getRepository('BBITPageBundle:AbstractPage')
-            ->findOneBy(['slug' => $uri]);
+        /** @var TreeItem $treeItem */
+        $treeItem = $this->get('doctrine')->getManager()
+            ->getRepository('BBITPageBundle:TreeItem')
+            ->findOneBy(['title' => $uri]);
 
-        if ($page) {
+        if ($uri == '') {
+            $treeItem = $this->get('doctrine')
+                ->getManager()
+                ->getRepository('BBITPageBundle:TreeItem')
+                ->getHomePageTreeItem();
+        }
 
-            return $this->renderPage($page, $request);
+
+        if ($treeItem && $treeItem->getPage()) {
+
+            return $this->renderPage($treeItem->getPage(), $request);
 
 
         } else {
-            exit("00not found");
+            exit("00000not found");
         }
 
 
